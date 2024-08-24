@@ -32,4 +32,4 @@ window.onload = function() {
   }
   drawCard();
 };
- //faltan botones inputs temporizadores
+//faltan botones inputs temporizadores

@@ -6,13 +6,43 @@
     <title>Hello Rigo with Vanilla.js</title>
     <link
       rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-      integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
       crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
     <link rel="shortcut icon" href="./4geeks.ico" />
   </head>
   <body class="bg-success">
+    <div class="container pt-3 m-0 w-100 d-flex align-items-center">
+      <div class="row">
+        <div class="col-3">
+          <h4 class="fw-bold fs-3">Original:</h4>
+        </div>
+        <div class="col-3 p-1">
+          <input class="rounded-2 border-1 shadow w-100 p-2" type="text" />
+        </div>
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-warning border-1 shadow fw-bold fs-5"
+          >
+            Draw <i class="fa-solid fa-rotate"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark border-1 shadow fw-bold p-2 fs-5"
+          >
+            Sort <i class="fa-solid fa-arrow-down-short-wide"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- card random container  -->
+    <div class="row"></div>
+    <!-- card sorting container -->
+    <h5 class="fs-3 fw-bold ps-3">Bubble Sorting:</h5>
+    <div class="row"></div>
     <div
       class="card w-25 position-absolute top-50 start-50 translate-middle display-1 fw-bold rounded-4 shadow border-2 border-secondary"
     >
