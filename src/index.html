@@ -20,18 +20,26 @@
           <h4 class="fw-bold fs-3">Original:</h4>
         </div>
         <div class="col-3 p-1">
-          <input class="rounded-2 border-1 shadow w-100 p-2" type="text" />
+          <input
+            id="numCards"
+            class="rounded-2 border-1 shadow w-100 p-2"
+            type="text"
+            placeholder="N. Cards"
+          />
         </div>
         <div class="col-6">
           <button
+            id="draw"
             type="button"
             class="btn btn-warning border-1 shadow fw-bold fs-5"
           >
             Draw <i class="fa-solid fa-rotate"></i>
           </button>
           <button
+            id="sort"
             type="button"
             class="btn btn-dark border-1 shadow fw-bold p-2 fs-5"
+            onclick="cardSort()"
           >
             Sort <i class="fa-solid fa-arrow-down-short-wide"></i>
           </button>
@@ -39,20 +47,9 @@
       </div>
     </div>
     <!-- card random container  -->
-    <div class="row"></div>
+    <div id="cardsContainer" class="row"></div>
     <!-- card sorting container -->
-    <h5 class="fs-3 fw-bold ps-3">Bubble Sorting:</h5>
+    <h5 id="sortContainer" class="fs-3 fw-bold ps-3">Bubble Sorting:</h5>
     <div class="row"></div>
-    <div
-      class="card w-25 position-absolute top-50 start-50 translate-middle display-1 fw-bold rounded-4 shadow border-2 border-secondary"
-    >
-      <div id="header" class="text-start pb-5 ps-2"></div>
-      <div id="number" class="text-center p-5"></div>
-      <div
-        id="footer"
-        class="text-end pb-5 pe-2"
-        style="transform:scaleY(-1)"
-      ></div>
-    </div>
   </body>
 </html>
