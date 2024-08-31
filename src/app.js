@@ -21,7 +21,6 @@ window.onload = function() {
     K: 13
   };
   let cards = [];
-  let arrCards = [];
   let draw = document.getElementById("draw");
   let sort = document.getElementById("sort");
   let numCards = document.getElementById("numCards");
@@ -32,56 +31,51 @@ window.onload = function() {
     let result = Math.floor(Math.random() * array.length);
     return array[result];
   }
-  //Generador de una carta random
-  function drawCard() {
-    let randomCardNum = randomGenerator(num);
-    let randomCardSym = randomGenerator(sym);
-    let color;
-    if (randomCardSym === "♠" || randomCardSym === "♣") {
-      color = "black";
-    } else {
-      color = "red";
-    }
-    let cardDiv = document.createElement("div");
-    cardDiv.style.border = "1px solid black";
-    cardDiv.style.borderRadius = "4px";
-    cardDiv.style.width = "70px";
-    cardDiv.style.height = "95px";
-    cardDiv.style.margin = "5px";
-    cardDiv.style.paddingLeft = "2px";
-    cardDiv.style.paddingRight = "2px";
-    cardDiv.style.backgroundColor = "white";
-    cardDiv.style.display = "flex";
-    cardDiv.style.justifyContent = "space-between";
-
-    let cardSymDivTop = document.createElement("div");
-    cardSymDivTop.innerHTML = randomCardSym;
-    cardSymDivTop.style.color = color;
-
-    let cardNumDiv = document.createElement("div");
-    cardNumDiv.innerHTML = randomCardNum;
-    cardNumDiv.style.fontSize = "25px";
-    cardNumDiv.style.alignContent = "center";
-
-    let cardSymDivBottom = document.createElement("div");
-    cardSymDivBottom.innerHTML = randomCardSym;
-    cardSymDivBottom.style.color = color;
-    cardSymDivBottom.style.transform = "rotate(180deg)";
-
-    cardDiv.appendChild(cardSymDivTop);
-    cardDiv.appendChild(cardNumDiv);
-    cardDiv.appendChild(cardSymDivBottom);
-    return cardDiv;
-  }
-  //generador de un array de cartas random
+  //Generador de un array de cartas random
   draw.addEventListener("click", () => {
     cardsContainer.innerHTML = "";
-    arrCards = [];
+    cards = [];
     for (let i = 0; i < numCards.value; i++) {
-      let cardRandom = drawCard();
-      arrCards.push(cardRandom);
-      cardsContainer.appendChild(cardRandom);
-      // arrCards.push([cardValue, cardDiv]);
+      let randomCardNum = randomGenerator(num);
+      let randomCardSym = randomGenerator(sym);
+      let cardValue = numValue[randomCardNum];
+      let color;
+      if (randomCardSym === "♠" || randomCardSym === "♣") {
+        color = "black";
+      } else {
+        color = "red";
+      }
+      let cardDiv = document.createElement("div");
+      cardDiv.style.border = "1px solid black";
+      cardDiv.style.borderRadius = "4px";
+      cardDiv.style.width = "70px";
+      cardDiv.style.height = "95px";
+      cardDiv.style.margin = "5px";
+      cardDiv.style.paddingLeft = "2px";
+      cardDiv.style.paddingRight = "2px";
+      cardDiv.style.backgroundColor = "white";
+      cardDiv.style.display = "flex";
+      cardDiv.style.justifyContent = "space-between";
+
+      let cardSymDivTop = document.createElement("div");
+      cardSymDivTop.innerHTML = randomCardSym;
+      cardSymDivTop.style.color = color;
+
+      let cardNumDiv = document.createElement("div");
+      cardNumDiv.innerHTML = randomCardNum;
+      cardNumDiv.style.fontSize = "25px";
+      cardNumDiv.style.alignContent = "center";
+
+      let cardSymDivBottom = document.createElement("div");
+      cardSymDivBottom.innerHTML = randomCardSym;
+      cardSymDivBottom.style.color = color;
+      cardSymDivBottom.style.transform = "rotate(180deg)";
+
+      cardDiv.appendChild(cardSymDivTop);
+      cardDiv.appendChild(cardNumDiv);
+      cardDiv.appendChild(cardSymDivBottom);
+      cardsContainer.appendChild(cardDiv);
+      cards.push([cardValue, cardDiv]);
     }
   });
   // SORT
@@ -90,14 +84,16 @@ window.onload = function() {
 
     let lineDiv = document.createElement("div");
     lineDiv.style.marginTop = "10px";
-    lineDiv.style.display = "flex";
-    lineDiv.style.alignItems = "center";
+    // lineDiv.style.display = "flex";
+    // lineDiv.style.alignItems = "center";
+    lineDiv.classList.add("d-flex", "flex-column", "gap-2");
     sortContainer.innerHTML = "";
     sortContainer.appendChild(lineDiv);
     while (wall > 0) {
       let index = 0;
       let otherDiv = document.createElement("div");
-      otherDiv.style.display = "flex";
+      // otherDiv.style.display = "flex";
+      otherDiv.classList.add("d-flex", "gap-2");
       while (index < wall) {
         if (arr[index][0] > arr[index + 1][0]) {
           [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
@@ -107,7 +103,8 @@ window.onload = function() {
           });
           lineDiv.appendChild(otherDiv);
           otherDiv = document.createElement("div");
-          otherDiv.style.display = "flex";
+          // otherDiv.style.display = "flex";
+          otherDiv.classList.add("d-flex", "gap-2");
         }
         index++;
       }
@@ -115,7 +112,8 @@ window.onload = function() {
     }
 
     let lastDiv = document.createElement("div");
-    lastDiv.style.display = "flex";
+    // lastDiv.style.display = "flex";
+    lastDiv.classList.add("d-flex", "gap-2");
     arr.forEach(item => {
       lastDiv.innerHTML += item[1];
     });
@@ -125,16 +123,17 @@ window.onload = function() {
   };
 
   sort.addEventListener("click", () => {
-    // console.log(arrCards);
+    // console.log(cards);
     let sortDiv = document.createElement("div");
-    sortDiv.style.display = "flex";
-    sortDiv.style.alignItems = "center";
+    // sortDiv.style.display = "flex";
+    // sortDiv.style.alignItems = "center";
+    sortDiv.classList.add("d-flex", "gap-2");
 
     sortContainer.innerHTML = "";
     sortContainer.appendChild(sortDiv);
-    arrCards.forEach(item => {
+    cards.forEach(item => {
       sortDiv.innerHTML += item[1];
     });
-    bubbleSort(arrCards);
+    bubbleSort(cards);
   });
 };
