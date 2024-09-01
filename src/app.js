@@ -76,64 +76,37 @@ window.onload = function() {
       cardDiv.appendChild(cardSymDivBottom);
       cardsContainer.appendChild(cardDiv);
       cards.push([cardValue, cardDiv]);
+      console.log(cards);
     }
   });
   // SORT
-  const bubbleSort = arr => {
+  function bubbleSort(arr) {
     let wall = arr.length - 1; //iniciamos el muro al final del array
-
-    let lineDiv = document.createElement("div");
-    lineDiv.style.marginTop = "10px";
-    // lineDiv.style.display = "flex";
-    // lineDiv.style.alignItems = "center";
-    lineDiv.classList.add("d-flex", "flex-column", "gap-2");
-    sortContainer.innerHTML = "";
-    sortContainer.appendChild(lineDiv);
     while (wall > 0) {
       let index = 0;
-      let otherDiv = document.createElement("div");
-      // otherDiv.style.display = "flex";
-      otherDiv.classList.add("d-flex", "gap-2");
+      // let swapped = false;
       while (index < wall) {
         if (arr[index][0] > arr[index + 1][0]) {
-          [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
-          otherDiv.innerHTML = "";
+          // [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+          let aux = arr[index];
+          arr[index] = arr[index + 1];
+          arr[index + 1] = aux;
+          //   swapped = true;
           arr.forEach(item => {
-            otherDiv.innerHTML += item[1];
+            sortContainer.appendChild(item[1]); // Agrega cada carta al contenedor
           });
-          lineDiv.appendChild(otherDiv);
-          otherDiv = document.createElement("div");
-          // otherDiv.style.display = "flex";
-          otherDiv.classList.add("d-flex", "gap-2");
         }
         index++;
       }
+      // if (!swapped) break; //Detener si no hay cambios
       wall--; //disminuir la pared para optimizar
     }
-
-    let lastDiv = document.createElement("div");
-    // lastDiv.style.display = "flex";
-    lastDiv.classList.add("d-flex", "gap-2");
-    arr.forEach(item => {
-      lastDiv.innerHTML += item[1];
-    });
-    lineDiv.appendChild(lastDiv);
-
     return arr;
-  };
-
+  }
   sort.addEventListener("click", () => {
     // console.log(cards);
-    let sortDiv = document.createElement("div");
-    // sortDiv.style.display = "flex";
-    // sortDiv.style.alignItems = "center";
-    sortDiv.classList.add("d-flex", "gap-2");
-
     sortContainer.innerHTML = "";
-    sortContainer.appendChild(sortDiv);
-    cards.forEach(item => {
-      sortDiv.innerHTML += item[1];
-    });
     bubbleSort(cards);
+    console.log(cards);
   });
 };
