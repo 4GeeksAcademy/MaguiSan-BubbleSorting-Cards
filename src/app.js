@@ -2,7 +2,7 @@ import "bootstrap";
 import "./style.css";
 
 window.onload = function() {
-  // declaracion de variables
+  // Declarando variables
   let sym = ["♦", "♥", "♠", "♣"];
   let num = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
   let numValue = {
@@ -26,7 +26,9 @@ window.onload = function() {
   let numCards = document.getElementById("numCards");
   let cardsContainer = document.getElementById("cardsContainer");
   let sortContainer = document.getElementById("sortContainer");
+  let template = document.getElementById("list").content;
 
+  //Funcion para crear un array con valores random
   function randomGenerator(array) {
     let result = Math.floor(Math.random() * array.length);
     return array[result];
@@ -79,34 +81,41 @@ window.onload = function() {
       console.log(cards);
     }
   });
-  // SORT
+  //Ordenando las cartas por el metodo bubble sort
   function bubbleSort(arr) {
+    console.log("Iniciando la función Bubble Sort", arr);
+    // Limpiando el contenedor antes de comenzar
+    sortContainer.innerHTML = "";
     let wall = arr.length - 1; //iniciamos el muro al final del array
     while (wall > 0) {
       let index = 0;
-      // let swapped = false;
       while (index < wall) {
         if (arr[index][0] > arr[index + 1][0]) {
-          // [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+          // Intercambiando los elementos
           let aux = arr[index];
           arr[index] = arr[index + 1];
           arr[index + 1] = aux;
-          //   swapped = true;
-          arr.forEach(item => {
-            sortContainer.appendChild(item[1]); // Agrega cada carta al contenedor
-          });
+          // Capturando los valores para mostrar cada etapa de intercambio
+          console.log("clonar", [...arr]);
+          displayArrayState([...arr]);
         }
         index++;
       }
-      // if (!swapped) break; //Detener si no hay cambios
       wall--; //disminuir la pared para optimizar
     }
-    return arr;
   }
+  //Funcion para mostrar cada etapa
+  function displayArrayState(arr) {
+    let clone = document.importNode(template, true);
+    let row = clone.querySelector(".row");
+    arr.forEach(item => {
+      let cardClone = item[1].cloneNode(true);
+      row.appendChild(cardClone);
+    });
+    sortContainer.appendChild(clone);
+  }
+  //Generando el ordenamiento
   sort.addEventListener("click", () => {
-    // console.log(cards);
-    sortContainer.innerHTML = "";
     bubbleSort(cards);
-    console.log(cards);
   });
 };
